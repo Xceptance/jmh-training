@@ -18,7 +18,7 @@ import org.openjdk.jmh.annotations.Warmup;
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Fork(value = 1, jvmArgsAppend = "-Xms4g -Xmx4g -XX:+AlwaysPreTouch -XX:+UseSerialGC")
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
