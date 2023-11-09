@@ -1,0 +1,53 @@
+package org.xc.jmh;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.CompilerControl;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
+/**
+ * The simplest JMH benchmark, it is still non-sense!
+ * Show that both are the same, if they do the same
+ */
+@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
+@Fork(1)
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@State(Scope.Thread)
+public class A06
+{
+	long time;
+
+	@Setup
+	public void setup()
+	{
+		time = System.currentTimeMillis();
+	}
+
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public long addDynamic_Mod()
+	{
+		return 1 + 1699446438633L;
+	}
+
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public long addStatic()
+	{
+		return 1 + 1;
+	}
+}
