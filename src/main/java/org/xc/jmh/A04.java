@@ -44,4 +44,10 @@ public class A04
 	{
 		return 1L + 1L;
 	}
+
+	@Benchmark
+	public long addDynamicExpensive()
+	{
+		return (long) (1 + time * 2 / time * 12.271);
+	}
 }

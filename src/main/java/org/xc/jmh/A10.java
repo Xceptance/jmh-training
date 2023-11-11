@@ -36,19 +36,30 @@ public class A10
 	}
 
 	@Benchmark
-	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
 	public void addWrong()
 	{
 		var x = 1L + 1L;
 	}
 
 	@Benchmark
-	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
 	public void addDynamicWrong()
 	{
 		var x = 1L + time;
 	}
 
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public void addWrongNoInline()
+	{
+		var x = 1L + 1L;
+	}
+
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public void addDynamicWrongNoInline()
+	{
+		var x = 1L + time;
+	}
 
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)

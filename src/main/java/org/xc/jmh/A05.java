@@ -48,6 +48,13 @@ public class A05
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
 	public long addStatic()
 	{
-		return 1 + 1;
+		return 1 + 1699446438633L;
+	}
+
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public long addDynamicExpensive()
+	{
+		return (long) (1 + time * 2 / time * 12.271);
 	}
 }

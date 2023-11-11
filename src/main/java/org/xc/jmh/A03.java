@@ -37,9 +37,15 @@ public class A03
 	}
 
 	@Benchmark
-	public void add()
+	public void addCheap()
 	{
 		var x = 1 + time;
+	}
+
+	@Benchmark
+	public void addExpensive()
+	{
+		var x = (long) (1 + time * 2 / time * 12.271);
 	}
 
     public static void main(String[] args) throws RunnerException

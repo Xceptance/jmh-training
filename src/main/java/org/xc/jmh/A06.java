@@ -46,6 +46,13 @@ public class A06
 
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public long addDynamic()
+	{
+		return 1 + time;
+	}
+
+	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
 	public long addStatic()
 	{
 		return 1 + 1;

@@ -1,5 +1,6 @@
 package org.xc.jmh;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -13,42 +14,45 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-/**
- *
- */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgsAppend = {"-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class D01
+public class E01
 {
-	@Setup
-	public void setup()
-	{
+    final int[] integers = new int[1000];
 
-	}
+    @Setup
+    public void setup()
+    {
+        for (int i = 0; i < integers.length; i++)
+        {
+            integers[i] = i;
+        }
+    }
 
-	@Benchmark
-	public String classic()
-	{
-		// classic string magic here
-		return null;
-	}
+    @Benchmark
+    public int lambda()
+    {
+        return Arrays.stream(integers).filter(i -> i % 2 == 0).sum();
+    }
 
-	@Benchmark
-	public String builder()
-	{
-		// use a stringbuilder
-		return null;
-	}
+    @Benchmark
+    public int loop()
+    {
+        int sum = 0;
+        for (int i = 0; i < integers.length; i++)
+        {
+            var v = integers[i];
+            if (v % 2 == 0)
+            {
+                sum += v;
+            }
+        }
 
-	@Benchmark
-	public String sizedBuilder()
-	{
-		// use a presized stringbuilder
-		return null;
-	}
+        return sum;
+    }
 }
 
