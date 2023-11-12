@@ -44,7 +44,7 @@ public class C02
 		return dest;
 	}
 	@Benchmark
-    @Warmup(iterations = 1, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+    @Warmup(iterations = 1, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	public byte[] systemCopyWarm()
 	{
 		var dest = new byte[src.length];
@@ -76,7 +76,7 @@ public class C02
 		return dest;
 	}
 	@Benchmark
-    @Warmup(iterations = 1, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+    @Warmup(iterations = 1, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	public byte[] manualCopyWarm()
 	{
 		var dest = new byte[src.length];
