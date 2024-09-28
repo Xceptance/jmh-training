@@ -63,52 +63,52 @@ public class A10
 
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public void addDynamicBlackhole(final Blackhole bh)
-	{
-		bh.consume(1L + time);
-	}
-
-	@Benchmark
-	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public void addStaticBlackhole(final Blackhole bh)
-	{
-		bh.consume(1L + 1L);
-	}
-
-	@Benchmark
-	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public long addDynamicReturn()
-	{
-		return 1L + time;
-	}
-
-	@Benchmark
-	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public long addStaticReturn()
-	{
-		return 1L + 1L;
-	}
-
-	@Benchmark
 	public void addDynamicBlackholeNoInline(final Blackhole bh)
 	{
 		bh.consume(1L + time);
 	}
 
 	@Benchmark
-	public void addStaticBlackholeNoInline(final Blackhole bh)
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public void addBlackholeNoInline(final Blackhole bh)
 	{
 		bh.consume(1L + 1L);
 	}
 
 	@Benchmark
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
 	public long addDynamicReturnNoInline()
 	{
 		return 1L + time;
 	}
 
 	@Benchmark
-	public long addStaticReturnNoInline()
+	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
+	public long addReturnNoInline()
+	{
+		return 1L + 1L;
+	}
+
+	@Benchmark
+	public void addDynamicBlackhole(final Blackhole bh)
+	{
+		bh.consume(1L + time);
+	}
+
+	@Benchmark
+	public void addBlackhole(final Blackhole bh)
+	{
+		bh.consume(1L + 1L);
+	}
+
+	@Benchmark
+	public long addDynamicReturn()
+	{
+		return 1L + time;
+	}
+
+	@Benchmark
+	public long addReturn()
 	{
 		return 1L + 1L;
 	}
