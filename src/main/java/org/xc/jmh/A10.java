@@ -88,4 +88,28 @@ public class A10
 	{
 		return 1L + 1L;
 	}
+
+	@Benchmark
+	public void addDynamicBlackholeNoInline(final Blackhole bh)
+	{
+		bh.consume(1L + time);
+	}
+
+	@Benchmark
+	public void addStaticBlackholeNoInline(final Blackhole bh)
+	{
+		bh.consume(1L + 1L);
+	}
+
+	@Benchmark
+	public long addDynamicReturnNoInline()
+	{
+		return 1L + time;
+	}
+
+	@Benchmark
+	public long addStaticReturnNoInline()
+	{
+		return 1L + 1L;
+	}
 }
