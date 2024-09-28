@@ -26,14 +26,14 @@ public class A08
 {
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public long doNothing()
+	public long doNothing1()
 	{
 		return 2 * 1699446438633L / 2 + 3 - 8272L;
 	}
 
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public long complex()
+	public long doNothing2()
 	{
 		return 2 * 1699446438633L / 2 + 3 - 8272L;
 	}
