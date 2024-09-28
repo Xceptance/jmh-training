@@ -58,13 +58,13 @@ public class A11
 	@Benchmark
 	public double baseline()
 	{
-		return compute(x1);
+		return compute(x2);
 	}
 
 	/*
 	 * While the compute(x2) computation is intact, compute(x1)
 	 * does not have any effect or sideeffect, hence it can be
-	 * safley dropped
+	 * safely dropped
 	 */
 	@Benchmark
 	public double measureWrong()
@@ -73,14 +73,14 @@ public class A11
 		return compute(x2);
 	}
 
-	/**
-	 * Verify that measureWrong really has a dropped compute(x1)
+	/*
+	 * Incorrect blackhole usage
 	 */
 	@Benchmark
-	public double measureWrongProof()
+	public void measureWrong_Blackholes(Blackhole bh)
 	{
-		// compute(x1);
-		return compute(x2);
+		compute(x1);
+		bh.consume(compute(x2));
 	}
 
 	/*
