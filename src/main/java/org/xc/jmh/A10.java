@@ -42,7 +42,7 @@ public class A10
 	}
 
 	@Benchmark
-	public void addDynamicWrong()
+	public void addWrongDynamic()
 	{
 		var x = 1L + time;
 	}
@@ -56,7 +56,7 @@ public class A10
 
 	@Benchmark
 	@CompilerControl(CompilerControl.Mode.DONT_INLINE)
-	public void addDynamicWrongNoInline()
+	public void addWrongDynamicNoInline()
 	{
 		var x = 1L + time;
 	}
