@@ -12,10 +12,11 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.infra.Blackhole;
 
 /**
  * The simplest JMH benchmark
- * Produce a result!
+ * The optional way to blackhole stuff to avoid dropping it.
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -36,26 +37,26 @@ public class A04d
 	}
 
 	@Benchmark
-	public long addCheap1()
+	public void addCheap1(Blackhole b)
 	{
-		return 1 + 1727610292048L;
+		b.consume(1 + 1727610292048L);
 	}
 
 	@Benchmark
-	public long addCheap2()
+	public void addCheap2(Blackhole b)
 	{
-		return 1 + time;
+		b.consume(1 + time);
 	}
 
 	@Benchmark
-	public long addCheap3()
+	public void addCheap3(Blackhole b)
 	{
-		return 1 + lTime.longValue();
+		b.consume( 1 + lTime.longValue());
 	}
 
 	@Benchmark
-	public double addExpensive()
+	public void addExpensive(Blackhole b)
 	{
-		return (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
+		b.consume((time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d));
 	}
 }
