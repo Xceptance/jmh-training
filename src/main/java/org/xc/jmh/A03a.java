@@ -20,8 +20,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  * The simplest JMH benchmark, it is still non-sense!
  * Vary the data with a setup.
  */
-@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
@@ -37,21 +37,15 @@ public class A03a
 	}
 
 	@Benchmark
-	public void add()
+	public void addCheap()
 	{
 		var x = 1 + 1;
 	}
 
 	@Benchmark
-	public void addCheap()
-	{
-		var x = 1 + time;
-	}
-
-	@Benchmark
 	public void addExpensive()
 	{
-		var x = (long) (1 + time * 2 / time * 12.271);
+		var x = (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
 	}
 
     public static void main(String[] args) throws RunnerException
