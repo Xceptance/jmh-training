@@ -1,6 +1,5 @@
 package org.xc.jmh;
 
-import java.math.BigInteger;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -13,9 +12,6 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 /**
  * The simplest JMH benchmark, it is still non-sense!
@@ -31,14 +27,12 @@ public class A03b
 {
 	long time;
 	Long lTime;
-	BigInteger biTime;
 
 	@Setup
 	public void setup()
 	{
 		time = System.currentTimeMillis();
 		lTime = Long.valueOf(time);
-		biTime = BigInteger.valueOf(time);
 	}
 
 	@Benchmark
@@ -51,12 +45,6 @@ public class A03b
 	public void addCheap2()
 	{
 		var x = 1 + lTime.longValue();
-	}
-
-	@Benchmark
-	public void addWithSideEffect()
-	{
-		var x = 1 + biTime.longValue();
 	}
 
 	@Benchmark
