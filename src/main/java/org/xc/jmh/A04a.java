@@ -15,7 +15,7 @@ import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * The simplest JMH benchmark
- * Produce a result!
+ * Produce a result by returning data.
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
