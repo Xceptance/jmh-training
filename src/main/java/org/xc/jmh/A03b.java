@@ -29,7 +29,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @State(Scope.Thread)
 public class A03b
 {
-	long time;
+	Long time;
 	BigInteger biTime;
 
 	@Setup
@@ -42,13 +42,13 @@ public class A03b
 	@Benchmark
 	public void addCheap()
 	{
-		var x = 1 + 1;
+		var x = 1 + time.longValue();
 	}
 
 	@Benchmark
 	public void addWithSideEffect()
 	{
-		var x = 1 + biTime.intValue();
+		var x = 1 + biTime.longValue();
 	}
 
 	@Benchmark
