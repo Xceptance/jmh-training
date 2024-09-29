@@ -44,6 +44,12 @@ public class A04
 	@Benchmark
 	public long addCheap2()
 	{
+		return 1 + time;
+	}
+
+	@Benchmark
+	public long addCheap3()
+	{
 		return 1 + lTime.longValue();
 	}
 
