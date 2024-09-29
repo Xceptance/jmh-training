@@ -26,28 +26,30 @@ import org.openjdk.jmh.annotations.Warmup;
 public class A04
 {
 	long time;
+	Long lTime;
 
 	@Setup
 	public void setup()
 	{
 		time = System.currentTimeMillis();
+		lTime = Long.valueOf(time);
 	}
 
 	@Benchmark
-	public long addDynamic()
+	public long addCheap1()
 	{
-		return 1 + time;
+		return 1 + 1727610292048L;
 	}
 
 	@Benchmark
-	public long addStatic()
+	public long addCheap2()
 	{
-		return 1L + 1L;
+		return 1 + lTime.longValue();
 	}
 
 	@Benchmark
-	public long addDynamicExpensive()
+	public double addExpensive()
 	{
-		return (long) (1 + time * 2 / time * 12.271);
+		return (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
 	}
 }

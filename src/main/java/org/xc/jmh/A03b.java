@@ -41,8 +41,14 @@ public class A03b
 		var x = 1 + 1727610292048L;
 	}
 
-	@Benchmark
+    @Benchmark
 	public void addCheap2()
+    {
+		var x = 1 + time;
+	}
+
+	@Benchmark
+	public void addCheap3()
 	{
 		var x = 1 + lTime.longValue();
 	}
