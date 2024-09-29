@@ -34,7 +34,7 @@ public class A04c
 		lTime = Long.valueOf(time);
 	}
 
-	@Warmup(iterations = 2, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+	@Warmup(iterations = 1, time = 500, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 	@Benchmark
 	public long addShort()
