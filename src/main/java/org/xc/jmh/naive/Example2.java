@@ -2,10 +2,10 @@ package org.xc.jmh.naive;
 
 /**
  * You should always do a StringBuilder and not put a string together
- * manually. Also you have to size your stringbuilder. This test is garbage!
+ * manually. Also you have to size your StringBuilder.
+ * This test is garbage!
  *
  * @author rschwietzke
- *
  */
 public class Example2
 {
@@ -42,8 +42,8 @@ public class Example2
         }
         var e3 = System.nanoTime();
 
-        System.out.printf("Pure String usage  : %d ns%n", e3 - s3);
-        System.out.printf("StringBuilder      : %d ns%n", e1 - s1);
-        System.out.printf("Sized StringBuilder: %d ns%n", e2 - s2);
+        System.out.printf("Pure String usage  : %,d ns%n", e3 - s3);
+        System.out.printf("StringBuilder      : %,d ns%n", e1 - s1);
+        System.out.printf("Sized StringBuilder: %,d ns%n", e2 - s2);
     }
 }

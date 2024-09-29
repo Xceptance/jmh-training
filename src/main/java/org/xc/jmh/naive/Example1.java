@@ -25,7 +25,7 @@ public class Example1
         }
         var e2 = System.nanoTime();
 
-        System.out.printf("System Copy: %d ns%n", e1 - s1);
-        System.out.printf("Manual Copy: %d ns%n", e2 - s2);
+        System.out.printf("System Copy: %,d ns%n", e1 - s1);
+        System.out.printf("Manual Copy: %,d ns%n", e2 - s2);
     }
 }

@@ -9,23 +9,38 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /**
  * The simplest JMH benchmark, it is still non-sense!
  */
-@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
 public class A01
 {
-	@Benchmark
-	public void add()
+	long time;
+
+	@Setup
+	public void setup()
 	{
-		var x = 1 + 1;
+		time = System.currentTimeMillis();
 	}
+
+	@Benchmark
+	public void add1()
+	{
+		var x = (time * 0x5DEECE66DL + 0xBL + time) & (0xFFFFFFFFFFFFL);
+ 	}
+
+	@Benchmark
+	public void add2()
+	{
+		var x = 1 + 42;
+ 	}
 }

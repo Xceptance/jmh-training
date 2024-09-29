@@ -7,7 +7,6 @@ import java.util.Arrays;
  * and a parallel lambda approach.
  *
  * @author rschwietzke
- *
  */
 public class Example3
 {
@@ -45,12 +44,15 @@ public class Example3
 	    }
 	    var e3 = System.nanoTime();
 
-        System.out.printf("Manual  : %d ns%n", e1 - s1);
-        System.out.printf("Stream  : %d ns%n", e2 - s2);
-        System.out.printf("Parallel: %d ns%n", e3 - s3);
+        System.out.printf("Manual  : %,d ns%n", e1 - s1);
+        System.out.printf("Stream  : %,d ns%n", e2 - s2);
+        System.out.printf("Parallel: %,d ns%n", e3 - s3);
     }
 
-    private static long calc(long c)
+	/**
+	 * Borrowed from JMH to burn CPU without sideeffects
+	 */
+    private static long calc(final long c)
     {
         var t = c;
         for (long i = 100; i > 0; i--)

@@ -39,7 +39,7 @@ public class A02
 				// important, otherwise we will run all tests!
 				.include(A02.class.getSimpleName())
 				// 0 is needed for debugging, not for running
-				.forks(0)
+				.forks(1)
 				.build();
 
 		new Runner(opt).run();

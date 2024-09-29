@@ -21,7 +21,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
  * The simplest JMH benchmark, it is still non-sense!
  * Vary the data with a setup.
  */
-@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.MILLISECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
