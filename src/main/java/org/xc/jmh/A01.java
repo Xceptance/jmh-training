@@ -14,7 +14,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /**
- * The simplest JMH benchmark, it is still non-sense!
+ * This simple JMH benchmark is still non-sense!
  */
 @Warmup(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -33,14 +33,8 @@ public class A01
 	}
 
 	@Benchmark
-	public void add1()
+	public void add()
 	{
-		var x = (time * 0x5DEECE66DL + 0xBL + time) & (0xFFFFFFFFFFFFL);
- 	}
-
-	@Benchmark
-	public void add2()
-	{
-		var x = 1 + 42;
+		var x = (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
  	}
 }
