@@ -42,7 +42,7 @@ public class A03b
 	@Benchmark
 	public void addCheap()
 	{
-		var x = 1 + time.longValue();
+		var x = 1 + 1727610292048L;
 	}
 
 	@Benchmark
@@ -52,18 +52,8 @@ public class A03b
 	}
 
 	@Benchmark
-	public double addExpensive()
+	public void addExpensive()
 	{
-		return (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
+		var x = (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
 	}
-
-    public static void main(String[] args) throws RunnerException
-    {
-        var opt = new OptionsBuilder()
-        		// important, otherwise we will run all tests!
-                .include(A03b.class.getSimpleName())
-                .build();
-
-        new Runner(opt).run();
-    }
 }
