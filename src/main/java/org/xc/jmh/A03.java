@@ -37,6 +37,12 @@ public class A03
 	}
 
 	@Benchmark
+	public void add()
+	{
+		var x = 1 + 1;
+	}
+
+	@Benchmark
 	public void addCheap()
 	{
 		var x = 1 + time;
