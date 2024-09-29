@@ -26,7 +26,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class A03
+public class A03a
 {
 	long time;
 
@@ -58,7 +58,7 @@ public class A03
     {
         var opt = new OptionsBuilder()
         		// important, otherwise we will run all tests!
-                .include(A03.class.getSimpleName())
+                .include(A03a.class.getSimpleName())
                 .build();
 
         new Runner(opt).run();
