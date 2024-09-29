@@ -47,14 +47,4 @@ public class A03a
 	{
 		var x = (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
 	}
-
-    public static void main(String[] args) throws RunnerException
-    {
-        var opt = new OptionsBuilder()
-        		// important, otherwise we will run all tests!
-                .include(A03a.class.getSimpleName())
-                .build();
-
-        new Runner(opt).run();
-    }
 }

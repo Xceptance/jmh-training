@@ -29,20 +29,28 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @State(Scope.Thread)
 public class A03b
 {
-	Long time;
+	long time;
+	Long lTime;
 	BigInteger biTime;
 
 	@Setup
 	public void setup()
 	{
 		time = System.currentTimeMillis();
+		lTime = Long.valueOf(time);
 		biTime = BigInteger.valueOf(time);
 	}
 
 	@Benchmark
-	public void addCheap()
+	public void addCheap1()
 	{
 		var x = 1 + 1727610292048L;
+	}
+
+	@Benchmark
+	public void addCheap2()
+	{
+		var x = 1 + lTime.longValue();
 	}
 
 	@Benchmark
