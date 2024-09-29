@@ -36,6 +36,7 @@ public class A03b
 	public void setup()
 	{
 		time = System.currentTimeMillis();
+		biTime = BigInteger.valueOf(time);
 	}
 
 	@Benchmark
