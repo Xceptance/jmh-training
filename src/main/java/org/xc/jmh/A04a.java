@@ -17,13 +17,13 @@ import org.openjdk.jmh.annotations.Warmup;
  * The simplest JMH benchmark
  * Produce a result!
  */
-@Warmup(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class A04
+public class A04a
 {
 	long time;
 	Long lTime;
