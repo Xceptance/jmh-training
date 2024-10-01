@@ -1,5 +1,6 @@
 package org.xc.jmh;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class B04
 {
-	@Param({"1", "10", "100", "1000", "10000", "100000", "1000000", "10000000"})
+	@Param({"1", "10", "100", "1000", "10000", "100000",
+		"1000000", "10000000"})
 	int SIZE;
 	int[] data;
 
@@ -54,14 +56,8 @@ public class B04
 	}
 
 	@Benchmark
-	public long sumForEach()
+	public long sumStream()
 	{
-		long result = 0;
-		for (int d : data)
-		{
-			result += d;
-		}
-
-		return result;
+		return Arrays.stream(data).sum();
 	}
 }
