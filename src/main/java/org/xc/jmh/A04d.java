@@ -51,7 +51,7 @@ public class A04d
 	@Benchmark
 	public void addCheap3(Blackhole b)
 	{
-		b.consume( 1 + lTime.longValue());
+		b.consume(1 + lTime.longValue());
 	}
 
 	@Benchmark
