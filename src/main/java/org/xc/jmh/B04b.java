@@ -19,13 +19,13 @@ import org.openjdk.jmh.annotations.Warmup;
 /**
  * Setup
  */
-@Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 5, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class B04
+public class B04b
 {
 	@Param({"1", "10", "100", "1000", "10000", "100000",
 		"1000000", "10000000"})
