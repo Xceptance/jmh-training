@@ -50,11 +50,36 @@ public class Example7ArrayCopying
     }
 
     @Benchmark
-    public long[] manualCopy()
+    public long[] manualCopy1()
     {
         for (int i = 0; i < src.length - pos; i++)
         {
-            src[pos] = src[pos + i];
+            src[i] = src[pos + i];
+        }
+
+        return src;
+    }
+
+    @Benchmark
+    public long[] manualCopy2()
+    {
+    	var to = src.length - pos;
+        for (int i = 0; i < to; i++)
+        {
+            src[i] = src[pos + i];
+        }
+
+        return src;
+    }
+
+    @Benchmark
+    public long[] manualCopy3()
+    {
+    	var p = pos;
+    	var to = src.length - p;
+        for (int i = 0; i < to; i++, p++)
+        {
+            src[i] = src[p];
         }
 
         return src;
