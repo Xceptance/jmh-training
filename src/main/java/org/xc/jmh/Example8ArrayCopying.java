@@ -23,7 +23,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(1)
 public class Example8ArrayCopying
 {
-    @Param({"10", "1000", "100000"})
+    @Param({"1000"})
     int SIZE;
     int increment;
     long[] src, dest;
