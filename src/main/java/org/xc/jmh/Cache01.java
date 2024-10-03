@@ -26,14 +26,13 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(1)
 public class Cache01
 {
-    @Param({"1", "10", "1000", "10000"})
+    @Param({"10", "1000", "10000"})
     int SIZE = 1000;
 
     @Param({"true", "false"})
     boolean LINEAR = false;
 
-    final List<String> data = new ArrayList<>();
-    final Random random = new Random(721L);
+    final List<String> data = new ArrayList<>(SIZE);
 
     String[] CITIES = {"Berlin;", "Hannover;", "Prag;", "Rio;", "Hamburg;", "Paris;", "Rotterdam;"};
     String[] TEMPERATURES = {"-99.9", "99.9", "3.4", "-12.2", "22.2", "26.8", "31.1", "11.0", "-5.6"};
@@ -64,7 +63,7 @@ public class Cache01
         {
     		var s = data.get(i);
     		var pos = s.indexOf(';');
-    		total += Double.parseDouble(s.substring(pos + 1));
+    		total += pos + s.length(); // .parseDouble(s.substring(pos + 1));
         }
 
         return total;
