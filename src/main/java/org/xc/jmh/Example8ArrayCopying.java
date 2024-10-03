@@ -62,7 +62,19 @@ public class Example8ArrayCopying
     }
 
     @Benchmark
-    public long[] manualCopyAntiUnroll()
+    public long[] manualCopyAntiUnroll1()
+    {
+        for (long l = 0; l < src.length; l++)
+        {
+        	final var i = (int)l;
+            dest[i] = src[i];
+        }
+
+        return src;
+    }
+
+    @Benchmark
+    public long[] manualCopyAntiUnroll2()
     {
         for (int i = 0; i < src.length; i = i + increment)
         {
