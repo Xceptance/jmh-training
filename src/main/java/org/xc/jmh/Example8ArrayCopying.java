@@ -48,7 +48,7 @@ public class Example8ArrayCopying
     {
         System.arraycopy(dest, 0, src, 0, src.length);
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -59,7 +59,7 @@ public class Example8ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -70,7 +70,7 @@ public class Example8ArrayCopying
             dest[runVariable] = src[runVariable];
         }
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -82,7 +82,7 @@ public class Example8ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -93,7 +93,7 @@ public class Example8ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -105,6 +105,6 @@ public class Example8ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 }
