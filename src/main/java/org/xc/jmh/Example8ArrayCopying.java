@@ -39,7 +39,7 @@ public class Example8ArrayCopying
         {
         	src[i] = r.nextLong();
         }
-        increment = r.nextInt(1);
+        increment = r.nextInt(1) + 1;
     }
 
     @Benchmark
