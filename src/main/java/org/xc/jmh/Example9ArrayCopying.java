@@ -58,7 +58,7 @@ public class Example9ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 
     @Benchmark
@@ -78,6 +78,6 @@ public class Example9ArrayCopying
             dest[i] = src[i];
         }
 
-        return src;
+        return dest;
     }
 }
