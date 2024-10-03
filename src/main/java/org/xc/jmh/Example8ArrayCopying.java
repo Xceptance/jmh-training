@@ -51,9 +51,21 @@ public class Example8ArrayCopying
     }
 
     @Benchmark
-    public long[] manualCopy()
+    public long[] manualCopy1()
     {
         for (int i = 0; i < src.length; i++)
+        {
+            dest[i] = src[i];
+        }
+
+        return src;
+    }
+
+    @Benchmark
+    public long[] manualCopy2()
+    {
+    	int i = 0;
+        for (; i < src.length; i++)
         {
             dest[i] = src[i];
         }
