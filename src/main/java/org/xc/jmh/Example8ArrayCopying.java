@@ -87,7 +87,7 @@ public class Example8ArrayCopying
     @Benchmark
     public long[] manualCopyAntiUnroll3()
     {
-        final var inc = increment;
+        final int inc = increment;
         for (int i = 0; i < src.length; i = i + inc)
         {
             dest[i] = src[i];
