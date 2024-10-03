@@ -21,65 +21,61 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
-public class Example7ArrayCopying
+public class Example9ArrayCopying
 {
     @Param({"1000"})
     int SIZE;
-    int pos;
-    long[] src;
+    int increment;
+    int runVariable;
+    long[] src, dest;
 
     @Setup
     public void setup()
     {
         src = new long[SIZE];
-        pos = src.length / 2;
+        dest = new long[SIZE];
 
         final Random r = new Random(7L);
         for (int i = 0; i < src.length; i++)
         {
         	src[i] = r.nextLong();
         }
+        increment = r.nextInt(1) + 1;
     }
 
     @Benchmark
     public long[] systemCopy()
     {
-        System.arraycopy(src, 0, src, pos, src.length - pos);
-
+        System.arraycopy(dest, 0, src, 0, src.length);
         return src;
     }
 
     @Benchmark
-    public long[] manualCopy1()
+    public long[] manualCopyAntiUnroll()
     {
-        for (int i = 0; i < src.length - pos; i++)
+        for (int i = 0; i < src.length; i = i + increment)
         {
-            src[i] = src[pos + i];
+            dest[i] = src[i];
         }
 
         return src;
     }
 
     @Benchmark
-    public long[] manualCopy2()
+    public long[] manualCopyUnroll()
     {
-    	var to = src.length - pos;
-        for (int i = 0; i < to; i++)
+    	increment = increment * 4;
+    	var i = 0;
+        for (; i < src.length; i = i + increment)
         {
-            src[i] = src[pos + i];
+            dest[i] = src[i];
+            dest[i + 1] = src[i + 1];
+            dest[i + 2] = src[i + 2];
+            dest[i + 3] = src[i + 3];
         }
-
-        return src;
-    }
-
-    @Benchmark
-    public long[] manualCopy3()
-    {
-    	var p = pos;
-    	var to = src.length - p;
-        for (int i = 0; i < to; i++, p++)
+        for (; i < src.length; i++)
         {
-            src[i] = src[p];
+            dest[i] = src[i];
         }
 
         return src;
