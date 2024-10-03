@@ -26,6 +26,7 @@ public class Example8ArrayCopying
     @Param({"1000"})
     int SIZE;
     int increment;
+    int runVariable;
     long[] src, dest;
 
     @Setup
@@ -64,10 +65,9 @@ public class Example8ArrayCopying
     @Benchmark
     public long[] manualCopy2()
     {
-    	int i = 0;
-        for (; i < src.length; i++)
+        for (runVariable = 0; runVariable < src.length; runVariable++)
         {
-            dest[i] = src[i];
+            dest[runVariable] = src[runVariable];
         }
 
         return src;
