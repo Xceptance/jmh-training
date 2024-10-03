@@ -31,8 +31,11 @@ public class Cache01
 
     @Param({"true", "false"})
     boolean LINEAR = false;
+    @Param({"true", "false"})
+    boolean MOREGARBAGE = false;
 
     final List<String> data = new ArrayList<>(SIZE);
+    final List<String> garbage = new ArrayList<>(SIZE);
 
     String[] CITIES = {"Berlin;", "Hannover;", "Prag;", "Rio;", "Hamburg;", "Paris;", "Rotterdam;"};
     String[] TEMPERATURES = {"-99.9", "99.9", "3.4", "-12.2", "22.2", "26.8", "31.1", "11.0", "-5.6"};
@@ -45,7 +48,17 @@ public class Cache01
 
         for (int i = 0; i < SIZE; i++)
         {
+        	if (MOREGARBAGE)
+        	{
+        		garbage.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
+        	}
+
         	data.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
+
+        	if (MOREGARBAGE)
+        	{
+        		garbage.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
+        	}
         }
 
         if (!LINEAR)
