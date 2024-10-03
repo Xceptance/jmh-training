@@ -64,7 +64,7 @@ public class Example9ArrayCopying
     @Benchmark
     public long[] manualCopyUnroll()
     {
-    	increment = increment * 4;
+    	increment = 4;
     	var i = 0;
         for (; i < src.length; i = i + increment)
         {
