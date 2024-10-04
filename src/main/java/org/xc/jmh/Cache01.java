@@ -31,7 +31,7 @@ public class Cache01
     int SIZE = 1000;
 
     @Param({"true", "false"})
-    boolean LINEAR = false;
+    boolean RANDOM = false;
     @Param({"true", "false"})
     boolean MOREGARBAGE = false;
 
@@ -45,6 +45,7 @@ public class Cache01
     public void setup()
     {
     	data.clear();
+    	garbage.clear();
         final var r = new Random(7L);
 
         for (int i = 0; i < SIZE; i++)
@@ -57,7 +58,7 @@ public class Cache01
         	data.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
         }
 
-        if (!LINEAR)
+        if (RANDOM)
         {
         	Collections.shuffle(data, r);
         }
