@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -35,12 +36,12 @@ public class Cache01
     boolean MOREGARBAGE = false;
 
     final List<String> data = new ArrayList<>(SIZE);
-    final List<String> garbage = new ArrayList<>(SIZE);
+    final List<byte[]> garbage = new ArrayList<>(SIZE);
 
     String[] CITIES = {"Berlin;", "Hannover;", "Prag;", "Rio;", "Hamburg;", "Paris;", "Rotterdam;"};
     String[] TEMPERATURES = {"-99.9", "99.9", "3.4", "-12.2", "22.2", "26.8", "31.1", "11.0", "-5.6"};
 
-    @Setup
+    @Setup(Level.Trial)
     public void setup()
     {
     	data.clear();
@@ -50,15 +51,10 @@ public class Cache01
         {
         	if (MOREGARBAGE)
         	{
-        		garbage.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
+        		garbage.add(new byte[r.nextInt(5000)]);
         	}
 
         	data.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
-
-        	if (MOREGARBAGE)
-        	{
-        		garbage.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
-        	}
         }
 
         if (!LINEAR)
