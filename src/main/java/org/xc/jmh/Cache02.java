@@ -70,7 +70,7 @@ public class Cache02
 	@Benchmark
 	public double cacheHit()
 	{
-		var d = data.get(((counter++ % totalData) >> 32) + 1);
+		var d = data.get(0);
 
 		var total = 0d;
 		for (int i = 0; i < d.size(); i++)
