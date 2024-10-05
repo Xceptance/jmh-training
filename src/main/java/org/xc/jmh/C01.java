@@ -25,7 +25,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @State(Scope.Thread)
 public class C01
 {
-	final int SIZE = 10000;
+	final int SIZE = 100_000;
 	final byte[] src = new byte[SIZE];
 	final byte[] dest = new byte[SIZE];
 
