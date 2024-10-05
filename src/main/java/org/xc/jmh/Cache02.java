@@ -1,6 +1,7 @@
 package org.xc.jmh;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -26,8 +27,10 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(1)
 public class Cache02
 {
-	@Param({"10", "1000", "10000"})
-	int SIZE;
+	@Param({"10", "1000", "10000"}) int SIZE;
+
+    @Param({"true", "false"}) boolean RANDOM = false;
+
 	int totalData = 10_000;
 	int counter = 0;
 
@@ -51,6 +54,11 @@ public class Cache02
 			}
 			data.add(d);
 		}
+
+		if (RANDOM)
+		{
+			Collections.shuffle(data);
+		}
 	}
 
 	@Setup(Level.Iteration)
@@ -60,7 +68,23 @@ public class Cache02
 	}
 
 	@Benchmark
-	public double parse()
+	public double cacheHit()
+	{
+		var d = data.get(((counter++ % totalData) >> 32) + 1);
+
+		var total = 0d;
+		for (int i = 0; i < d.size(); i++)
+		{
+			var s = d.get(i);
+			var pos = s.indexOf(';');
+			total += pos + s.length(); // .parseDouble(s.substring(pos + 1));
+		}
+
+		return total;
+	}
+
+	@Benchmark
+	public double cacheMiss()
 	{
 		var d = data.get(counter++ % totalData);
 
