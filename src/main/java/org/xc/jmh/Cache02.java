@@ -29,9 +29,8 @@ public class Cache02
 {
 	@Param({"10", "1000", "10000"}) int SIZE;
 
-    @Param({"true", "false"}) boolean RANDOM = false;
-
 	int totalData = 10_000;
+	int baseSize = 10_000;
 	int counter = 0;
 
 	final List<List<String>> data = new ArrayList<>(SIZE);
@@ -48,16 +47,11 @@ public class Cache02
 		for (int j = 0; j < totalData; j++)
 		{
 			final List<String> d = new ArrayList<>(SIZE);
-			for (int i = 0; i < SIZE; i++)
+			for (int i = 0; i < baseSize; i++)
 			{
 				d.add(CITIES[r.nextInt(CITIES.length)] + TEMPERATURES[r.nextInt(TEMPERATURES.length)]);
 			}
 			data.add(d);
-		}
-
-		if (RANDOM)
-		{
-			Collections.shuffle(data);
 		}
 	}
 
@@ -73,7 +67,7 @@ public class Cache02
 		var d = data.get(0);
 
 		var total = 0d;
-		for (int i = 0; i < d.size(); i++)
+		for (int i = 0; i < SIZE; i++)
 		{
 			var s = d.get(i);
 			var pos = s.indexOf(';');
@@ -89,7 +83,7 @@ public class Cache02
 		var d = data.get(counter++ % totalData);
 
 		var total = 0d;
-		for (int i = 0; i < d.size(); i++)
+		for (int i = 0; i < SIZE; i++)
 		{
 			var s = d.get(i);
 			var pos = s.indexOf(';');
