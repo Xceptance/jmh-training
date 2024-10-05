@@ -27,6 +27,7 @@ public class C01
 {
 	final int SIZE = 10000;
 	final byte[] src = new byte[SIZE];
+	final byte[] dest = new byte[SIZE];
 
 	@Setup
 	public void setup()
@@ -38,21 +39,17 @@ public class C01
 	@Benchmark
 	public byte[] systemCopy()
 	{
-		var dest = new byte[src.length];
 		System.arraycopy(src, 0, dest, 0, src.length);
-
 		return dest;
 	}
 
 	@Benchmark
 	public byte[] manualCopy()
 	{
-		var dest = new byte[src.length];
 		for (int i = 0; i < src.length; i++)
 		{
 			dest[i] = src[i];
 		}
-
 		return dest;
 	}
 }
