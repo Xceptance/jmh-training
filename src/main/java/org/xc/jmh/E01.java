@@ -1,6 +1,5 @@
 package org.xc.jmh;
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -14,57 +13,46 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.BenchmarkParams;
 
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(value = 1, jvmArgsAppend = {"-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
 public class E01
 {
-	int iterationCount = 0;
-    final String[] integers = new String[1000];
+    final int[] integers = new int[1000];
 
     @Setup
-    public void setup(BenchmarkParams params)
+    public void setup()
     {
-    	iterationCount++;
-
         for (int i = 0; i < integers.length; i++)
         {
-            integers[i] = new String(String.valueOf(i));
-        }
-        // when we are beyond warmup the third time, inject failure
-        if (iterationCount == params.getWarmup().getCount() + 2)
-        {
-        	integers[integers.length / 2] = "any";
-        	System.out.println("now");
-        }
-        else
-        {
-        	
+            integers[i] = i;
         }
     }
 
     @Benchmark
-    public long parse()
+    public int lambda()
     {
-    	long total = 0;
-    	for (int i = 0; i < integers.length; i++)
-    	{
-    		try
-    		{
-    			total += Integer.valueOf(integers[i]);
-    		}
-    		catch(NumberFormatException e)
-    		{
-    			total = 0;
-    		}
-    	}
+        return Arrays.stream(integers).filter(i -> i % 2 == 0).sum();
+    }
 
-    	return total;
+    @Benchmark
+    public int loop()
+    {
+        int sum = 0;
+        for (int i = 0; i < integers.length; i++)
+        {
+            var v = integers[i];
+            if (v % 2 == 0)
+            {
+                sum += v;
+            }
+        }
+
+        return sum;
     }
 }
 
