@@ -57,6 +57,16 @@ class ParseDoubleTests
 
 	@ParameterizedTest
 	@MethodSource("dataSource")
+	void parseIntegerFixed3(Param p)
+	{
+	    assertEquals(
+	    		p.expected,
+	    		ParseDouble.parseIntegerFixed3(p.data.getBytes(), 0,
+	    				p.data.getBytes().length - 1));
+	}
+
+	@ParameterizedTest
+	@MethodSource("dataSource")
 	void parseIntegerByte(Param p)
 	{
 	    assertEquals(

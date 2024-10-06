@@ -184,7 +184,6 @@ public final class ParseDouble
     	if (offsetByte != '-')
         {
         	// 99.9 or 9.9
-
             if (length == 3)
             {
         		// we are 99.9
@@ -198,8 +197,56 @@ public final class ParseDouble
         	// -99.9 or -9,9
             if (length == 4)
             {
-        		// we are 99.9
+        		// we are -99.9
             	value += (b[end - 3] * 100) - DIGITOFFSET * 100;
+            }
+
+            return -value;
+        }
+    }
+
+    /**
+     * Parses a double but ends up with an int, only because we know
+     * the format of the results -99.9 to 99.9
+     */
+    public static int parseIntegerFixed3(final byte[] b, final int offset, final int end)
+    {
+        final int length = end - offset; // one is missing, we care for that later
+
+    	// we know the first three pieces already 9.9
+    	int p0 = b[end];
+    	int p1 = b[end - 2] * 10;
+    	int value = p0 + p1;
+
+    	int offsetByte = b[offset];
+    	if (offsetByte != '-')
+        {
+        	// 99.9 or 9.9
+            if (length == 3)
+            {
+        		// we are 99.9
+            	value += (offsetByte * 100);
+            	value -= (DIGITOFFSET * 100) + (DIGITOFFSET * 10) + DIGITOFFSET;
+            }
+            else
+            {
+            	value -= (DIGITOFFSET * 10) + DIGITOFFSET;
+            }
+
+        	return value;
+        }
+        else
+        {
+        	// -99.9 or -9,9
+            if (length == 4)
+            {
+        		// we are -99.9
+            	value += (b[end - 3] * 100);
+            	value -= (DIGITOFFSET * 100) + (DIGITOFFSET * 10) + DIGITOFFSET;
+            }
+            else
+            {
+            	value -= (DIGITOFFSET * 10) + DIGITOFFSET;
             }
 
             return -value;
