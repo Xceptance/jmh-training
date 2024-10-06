@@ -54,20 +54,46 @@ public class BRC01
 		double t = 1;
 		for (int i = 0; i < SIZE; i++)
 		{
-			Double.parseDouble(sNumbers.get(i));
+			t += Double.parseDouble(sNumbers.get(i));
 		}
 		return t;
 	}
 
 	@Benchmark
 	@OperationsPerInvocation(SIZE)
-	public double classicToInt()
+	public double ownParseDouble()
 	{
-		double t = 1;
+		double t = 1d;
 		for (int i = 0; i < SIZE; i++)
 		{
 			var s = sNumbers.get(i);
-			ParseDouble.parseDouble(s, 0, s.length() - 1);
+			t += ParseDouble.parseDouble(s, 0, s.length() - 1);
+		}
+		return t;
+	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromString()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = sNumbers.get(i);
+			t += ParseDouble.parseInteger(s, 0, s.length() - 1);
+		}
+		return t;
+	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByte()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseInteger(s, 0, s.length - 1);
 		}
 		return t;
 	}
