@@ -56,8 +56,16 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit-jupiter.version}</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
+
+        <dependency>
+	    	<groupId>org.junit.jupiter</groupId>
+	    	<artifactId>junit-jupiter-params</artifactId>
+	    	<version>${junit-jupiter.version}</version>
+	    	<scope>test</scope>
+		</dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
