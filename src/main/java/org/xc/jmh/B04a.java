@@ -20,15 +20,15 @@ import org.openjdk.jmh.annotations.Warmup;
  * Setup
  */
 @Warmup(iterations = 2, time = 1, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(1)
+@Measurement(iterations = 5, time = 2, timeUnit = TimeUnit.SECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
+@Fork(value = 1, jvmArgsAppend = {"-Xms4g", "-Xmx4g", "-XX:+AlwaysPreTouch"})
 public class B04a
 {
 	@Param({"1", "10", "100", "1000", "10000", "100000",
-		"1000000", "10000000", "100000000"})
+		"1000000", "10000000", "100000000", "1000000000"})
 	int SIZE;
 	int[] data;
 
