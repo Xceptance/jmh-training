@@ -126,6 +126,19 @@ public class BRC01
 
 	@Benchmark
 	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteFixed2()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseIntegerFixed2(s, 0, s.length - 1);
+		}
+		return t;
+	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
 	public int parseToIntFromByteFree()
 	{
 		int t = 1;
