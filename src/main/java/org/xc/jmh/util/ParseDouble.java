@@ -170,7 +170,7 @@ public final class ParseDouble
     /**
      * Parse int from byte without knowning the end, because we know the structure
      */
-    public int parseFromByte(final byte[] data, final int pos)
+    public static int parseFromByte(final byte[] data, final int pos)
     {
     	int i = pos;
 

@@ -97,5 +97,44 @@ public class BRC01
 		}
 		return t;
 	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteReverse()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseIntegerReverse(s, 0, s.length - 1);
+		}
+		return t;
+	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteFixed()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseIntegerFixed(s, 0, s.length - 1);
+		}
+		return t;
+	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteFree()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseFromByte(s, 0);
+		}
+		return t;
+	}
 }
 
