@@ -1,9 +1,6 @@
 package org.xc.jmh;
 
-import java.util.ArrayList;
-import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
@@ -20,7 +17,13 @@ import org.openjdk.jmh.infra.Blackhole;
 /**
  * Test several ways to split up strings. We are not implementing our own
  * solution for the moment, rather use what is provided. We want to split
- * a string by a String as single char
+ * a string by a char
+ *
+ * This is a small 1BRC exercise. The source format is
+ * City;Temperature e.g. Berlin;5.5 or Rom;34.5 or Bergen;-12.8
+ *
+ * The temperature will go into another method soon, hence, you are supposed
+ * to "consume" the temperature as String for the moment via a Blackhole.
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -28,56 +31,38 @@ import org.openjdk.jmh.infra.Blackhole;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class D11
+public class D05
 {
-	String data = "foo,bar,bar,test,xmas";
-	String del = ",";
-
 	@Setup
 	public void setup()
 	{
-		data = new String(data + data + data + data);
+		// Berlin;12.4
+		// Rom;25.9
+		// Bergen;-5.5
 	}
 
 	@Benchmark
-	public void split(final Blackhole bj)
+	public void split(final Blackhole b)
 	{
-		bj.consume(D11.split(data,  del));
+		// String::split()
 	}
 
 	@Benchmark
-	public void tokenizer(final Blackhole bj)
+	public void indexOf(final Blackhole b)
 	{
-		bj.consume(D11.tokenizer(data,  del));
+		// String::indexOf
 	}
 
 	@Benchmark
-	public void regex(final Blackhole bj)
+	public void tokenizer(final Blackhole b)
 	{
-		bj.consume(D11.regex(data,  del));
+		// use StringTokenizer
 	}
 
-	public static String[] split(String s, String d)
+	@Benchmark
+	public void yourOwn(final Blackhole b)
 	{
-		return s.split(d);
-	}
-
-	public static String[] tokenizer(String s, String d)
-	{
-		var st = new StringTokenizer(s, d);
-		var l = new ArrayList<String>();
-		while (st.hasMoreTokens())
-		{
-			l.add(st.nextToken());
-		}
-		var result = new String[l.size()];
-		return l.toArray(result);
-	}
-
-	public static String[] regex(String s, String d)
-	{
-		// split using
-		return Pattern.compile(s).split(d);
+		// an optional different idea
 	}
 }
 

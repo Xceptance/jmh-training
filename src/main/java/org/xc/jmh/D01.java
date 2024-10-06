@@ -56,7 +56,7 @@ public class D01
 	{
 		// use a presized stringbuilder
 		// new StringBuilder(expectedSize)
-		// a.eppend(b)
+		// a.append(b)
 		return null;
 	}
 }

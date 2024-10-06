@@ -1,5 +1,8 @@
 package org.xc.jmh;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -12,18 +15,10 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
+import org.xc.jmh.util.ParseDouble;
 
 /**
- * Test several ways to split up strings. We are not implementing our own
- * solution for the moment, rather use what is provided. We want to split
- * a string by a char
- *
- * This is a small 1BRC exercise. The source format is
- * City;Temperature e.g. Berlin;5.5 or Rom;34.5 or Bergen;-12.8
- *
- * The temperature will go into another method soon, hence, you are supposed
- * to "consume" the temperature as String for the moment via a Blackhole.
+ * Just some BRC number parsing fun
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -31,38 +26,47 @@ import org.openjdk.jmh.infra.Blackhole;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Thread)
-public class D10
+public class BRC01
 {
+	final int SIZE = 10_000;
+	List<String> sNumbers = new ArrayList<>(SIZE);
+	List<byte[]> bNumbers = new ArrayList<>(SIZE);
+
 	@Setup
 	public void setup()
 	{
-		// Berlin;12.4
-		// Rom;25.9
-		// Bergen;-5.5
+		var r = new Random(4242L);
+		for (int i = 0; i < SIZE; i++)
+		{
+			var a = r.nextInt(199) - 99; // -99 to 99
+			var b = r.nextInt(10); // 0 to 9
+			var s = String.valueOf(a) + "." + String.valueOf(b);
+			sNumbers.add(s);
+			bNumbers.add(s.getBytes());
+		}
 	}
 
 	@Benchmark
-	public void split(final Blackhole b)
+	public double classic()
 	{
-		// String::split()
+		double t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			t += Double.parseDouble(sNumbers.get(i));
+		}
+		return t;
 	}
 
 	@Benchmark
-	public void indexOf(final Blackhole b)
+	public double classicToInt()
 	{
-		// String::indexOf
-	}
-
-	@Benchmark
-	public void tokenizer(final Blackhole b)
-	{
-		// use StringTokenizer
-	}
-
-	@Benchmark
-	public void yourOwn(final Blackhole b)
-	{
-		// if you have other ideas
+		double t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = sNumbers.get(i);
+			t += ParseDouble.parseDouble(s, 0, s.length() - 1);
+		}
+		return t;
 	}
 }
 
