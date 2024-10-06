@@ -52,7 +52,7 @@ public class BRC01
 		double t = 1;
 		for (int i = 0; i < SIZE; i++)
 		{
-			t += Double.parseDouble(sNumbers.get(i));
+			Double.parseDouble(sNumbers.get(i));
 		}
 		return t;
 	}
@@ -64,7 +64,7 @@ public class BRC01
 		for (int i = 0; i < SIZE; i++)
 		{
 			var s = sNumbers.get(i);
-			t += ParseDouble.parseDouble(s, 0, s.length() - 1);
+			ParseDouble.parseDouble(s, 0, s.length() - 1);
 		}
 		return t;
 	}
