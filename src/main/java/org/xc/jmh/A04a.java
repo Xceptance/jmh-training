@@ -58,4 +58,15 @@ public class A04a
 	{
 		return (time * 0x5DEECE66DL + 0xBL + time) / (time * time * 0.42d);
 	}
+
+	@Benchmark
+	public double addExpensiveOptimized()
+	{
+		long a1 = time * 0x5DEECE66DL;
+		long a2 = 0xBL + time;
+		long a3 = a1 + a2;
+		long b1 = time * time;
+		double b2 = b1 * 0.42d;
+		return a3 / b2;
+	}
 }

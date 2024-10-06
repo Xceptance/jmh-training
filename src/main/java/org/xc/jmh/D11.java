@@ -57,12 +57,6 @@ public class D11
 		bj.consume(D11.regex(data,  del));
 	}
 
-	@Benchmark
-	public void apacheTokenizer(final Blackhole bj)
-	{
-		bj.consume(D11.apacheTokenizer(data,  del));
-	}
-
 	public static String[] split(String s, String d)
 	{
 		return s.split(d);
@@ -84,12 +78,6 @@ public class D11
 	{
 		// split using
 		return Pattern.compile(s).split(d);
-	}
-
-	public static String[] apacheTokenizer(String s, String d)
-	{
-		var st = new org.apache.commons.text.StringTokenizer(s, d);
-		return st.getTokenArray();
 	}
 }
 

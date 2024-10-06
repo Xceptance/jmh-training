@@ -18,6 +18,12 @@ import org.openjdk.jmh.infra.Blackhole;
  * Test several ways to split up strings. We are not implementing our own
  * solution for the moment, rather use what is provided. We want to split
  * a string by a char
+ *
+ * This is a small 1BRC exercise. The source format is
+ * City;Temperature e.g. Berlin;5.5 or Rom;34.5 or Bergen;-12.8
+ *
+ * The temperature will go into another method soon, hence, you are supposed
+ * to "consume" the temperature as String for the moment via a Blackhole.
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -30,33 +36,33 @@ public class D10
 	@Setup
 	public void setup()
 	{
-
+		// Berlin;12.4
+		// Rom;25.9
+		// Bergen;-5.5
 	}
 
 	@Benchmark
-	public void split(final Blackhole bj)
+	public void split(final Blackhole b)
 	{
 		// String::split()
 	}
 
 	@Benchmark
-	public void tokenizer(final Blackhole bj)
+	public void indexOf(final Blackhole b)
 	{
-		// use StringTokenizer(data, delimiter)
+		// String::indexOf
 	}
 
 	@Benchmark
-	public void regex(final Blackhole bj)
+	public void tokenizer(final Blackhole b)
 	{
-		// split using
-		// Pattern.compile(delimiter)
-		// split(this);
+		// use StringTokenizer
 	}
 
 	@Benchmark
-	public void apacheTokenizer(final Blackhole bj)
+	public void yourOwn(final Blackhole b)
 	{
-		// org.apache.commons.text.StringTokenizer
+		// if you have other ideas
 	}
 }
 

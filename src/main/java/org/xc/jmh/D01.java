@@ -14,7 +14,7 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 /**
- *
+ * Just compare String building
  */
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -33,14 +33,21 @@ public class D01
 	@Benchmark
 	public String classic()
 	{
-		// classic string magic here
+		// classic string magic here, such as a + b
+		return null;
+	}
+
+	@Benchmark
+	public String concat()
+	{
+		// use a.concat(b)
 		return null;
 	}
 
 	@Benchmark
 	public String builder()
 	{
-		// use a stringbuilder
+		// use a stringbuilder a.append(b)
 		return null;
 	}
 
@@ -48,6 +55,8 @@ public class D01
 	public String sizedBuilder()
 	{
 		// use a presized stringbuilder
+		// new StringBuilder(expectedSize)
+		// a.eppend(b)
 		return null;
 	}
 }
