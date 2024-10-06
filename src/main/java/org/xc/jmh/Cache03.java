@@ -57,6 +57,18 @@ public class Cache03
     }
 
     @Benchmark
+    public int step1Reversed()
+    {
+        int sum = 0;
+        for (int i = SIZE - 1; i >= 0; i--)
+        {
+            sum += src[i];
+        }
+
+        return sum;
+    }
+
+    @Benchmark
     public int step2()
     {
         int sum = 0;
