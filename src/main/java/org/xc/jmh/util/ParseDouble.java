@@ -174,6 +174,59 @@ public final class ParseDouble
     {
     	int i = pos;
 
+        byte b = data[i++];
+        int negative;
+
+        // can be - or 0..9
+        if (b == '-')
+        {
+            negative = -1;
+            // read number again
+            b = data[i++];
+        }
+        else
+        {
+            negative = 1;
+        }
+
+        // ok, number for sure, -9 or 9
+        int value = b - DIGITOFFSET;
+        b = data[i++];
+
+        // now -99 or -9. or 99 or 9.
+        if (b == '.')
+        {
+            // read again for the data after the .
+            b = data[i];
+            value *= 10;
+            value += b - DIGITOFFSET;
+            return negative * value;
+        }
+        else
+        {
+            // was -99 or 99
+            i++;
+            byte b2 = data[i];
+
+            value *= 10;
+            value += b - DIGITOFFSET;
+
+            // we have seen the end now for certain
+            // skip over .
+            value *= 10;
+            value += b2 - DIGITOFFSET;
+
+            return negative * value;
+        }
+    }
+
+    /**
+     * Parse int from byte without knowning the end, because we know the structure
+     */
+    public static int parseFromByteSubtractionLast(final byte[] data, final int pos)
+    {
+    	int i = pos;
+
         // we know for the numbers that we are very fix in length,
         // so let's read forward
         // we don't check if we have enough data because we have correct

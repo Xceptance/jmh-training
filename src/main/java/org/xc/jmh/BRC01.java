@@ -136,5 +136,18 @@ public class BRC01
 		}
 		return t;
 	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteFreeOffsetSubtraction()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseFromByteSubtractionLast(s, 0);
+		}
+		return t;
+	}
 }
 
