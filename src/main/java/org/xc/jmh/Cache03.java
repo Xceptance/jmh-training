@@ -36,13 +36,22 @@ public class Cache03
     int step(int strideSize)
     {
         int sum = 0;
+        for (int i = 0; i < SIZE; i = i + strideSize)
+        {
+            sum += src[i];
+        }
+        return sum;
+    }
+
+    int stepLong(int strideSize)
+    {
+        int sum = 0;
         for (long i = 0; i < SIZE; i = i + strideSize)
         {
             sum += src[(int) i];
         }
         return sum;
     }
-
 
     @Benchmark
     public int step1()
@@ -108,5 +117,23 @@ public class Cache03
     public int stepUnrolled20()
     {
         return step(20);
+    }
+
+    @Benchmark
+    public int stepUnrolled1Long()
+    {
+        return stepLong(1);
+    }
+
+    @Benchmark
+    public int stepUnrolled2Long()
+    {
+        return stepLong(2);
+    }
+
+    @Benchmark
+    public int stepUnrolled20Long()
+    {
+        return stepLong(20);
     }
 }
