@@ -62,11 +62,13 @@ public class A04a
 	@Benchmark
 	public double addExpensiveOptimized()
 	{
-		long a1 = time * 0x5DEECE66DL;
-		long a2 = 0xBL + time;
-		long a3 = a1 + a2;
 		long b1 = time * time;
 		double b2 = b1 * 0.42d;
+
+		long a2 = 0xBL + time;
+		long a1 = time * 0x5DEECE66DL;
+		long a3 = a1 + a2;
+
 		return a3 / b2;
 	}
 }
