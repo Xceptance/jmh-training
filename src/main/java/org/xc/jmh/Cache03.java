@@ -75,6 +75,12 @@ public class Cache03
     }
 
     @Benchmark
+    public int stepUnrolled2()
+    {
+        return step(2);
+    }
+
+    @Benchmark
     public int stepUnrolled20()
     {
         return step(20);
