@@ -9,6 +9,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -23,11 +24,12 @@ import org.openjdk.jmh.infra.Blackhole;
 @State(Scope.Thread)
 public class E02
 {
+	@Param({"1", "10", "100"}) int WORK;
     final int[] integers = new int[1000];
 
-    private static int calc(final int a)
+    private int calc(final int a)
     {
-    	Blackhole.consumeCPU(100);
+    	Blackhole.consumeCPU(WORK);
     	return a;
     }
 
