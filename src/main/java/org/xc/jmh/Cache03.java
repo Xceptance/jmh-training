@@ -57,6 +57,18 @@ public class Cache03
     }
 
     @Benchmark
+    public int step2()
+    {
+        int sum = 0;
+        for (int i = 0; i < SIZE; i = i + 2)
+        {
+            sum += src[i];
+        }
+
+        return sum;
+    }
+
+    @Benchmark
     public int step20()
     {
         int sum = 0;
