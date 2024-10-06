@@ -36,9 +36,9 @@ public class Cache03
     int step(int strideSize)
     {
         int sum = 0;
-        for (int i = 0; i < SIZE; i = i + strideSize)
+        for (long i = 0; i < SIZE; i = i + strideSize)
         {
-            sum += src[i];
+            sum += src[(int) i];
         }
         return sum;
     }
