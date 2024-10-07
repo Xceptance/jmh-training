@@ -37,7 +37,7 @@ public class HeavyStreamsConsume
 
     static int calcAndBurn(int a)
     {
-    	Blackhole.consumeCPU(50);
+    	Blackhole.consumeCPU(500);
     	return a % 2;
     }
 
