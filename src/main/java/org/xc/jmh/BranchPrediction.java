@@ -17,8 +17,8 @@ import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
-@Warmup(iterations = 2, time = 2, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 4, time = 2, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
 @Threads(1)
 @BenchmarkMode(Mode.AverageTime)
@@ -48,12 +48,12 @@ public class BranchPrediction
         // only inline data and hence same caching behavior
         for (int i = 0; i < COUNT; i++)
         {
-        	final int d = r.nextInt(100_000_000) + 1;
+        	final int d = r.nextInt(100) + 1; // 1 to 100
 
             sorted[i] = d;
             unsorted[i] = d;
-            pattern2[i] = i % 2 == 0 ? 100_000_000 : r.nextInt(50_000_000);
-            pattern5[i] = i % 5 == 0 ? 100_000_000 : r.nextInt(50_000_000);
+            pattern2[i] = i % 2 == 0 ? 100 : 1;
+            pattern5[i] = i % 5 == 0 ? 100 : 1;
             shuffledPattern[i] = pattern2[i];
         }
         Arrays.sort(sorted);
@@ -72,7 +72,7 @@ public class BranchPrediction
     	long sum = 2;
         for (int v : array)
         {
-            if (v > 50_000_000)
+            if (v > 50)
             {
                 sum += (v >> 2);
 
