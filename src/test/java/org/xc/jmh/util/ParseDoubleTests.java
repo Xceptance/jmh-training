@@ -9,8 +9,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ParseDoubleTests
 {
-	record Param(String data, int expected)
+	static class Param
 	{
+		String data;
+		int expected;
+
+		public Param(String data, int expected)
+		{
+			this.data = data;
+			this.expected = expected;
+		}
+
 		double expectedAsDouble()
 		{
 			return expected / 10d;
