@@ -17,7 +17,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Measurement(iterations = 5, batchSize = 1, time=1, timeUnit = TimeUnit.NANOSECONDS)
 @Fork(1)
 public class HeavyStreamsConsume
