@@ -175,5 +175,18 @@ public class BRC01
 		}
 		return t;
 	}
+
+	@Benchmark
+	@OperationsPerInvocation(SIZE)
+	public int parseToIntFromByteFreeLessBranches()
+	{
+		int t = 1;
+		for (int i = 0; i < SIZE; i++)
+		{
+			var s = bNumbers.get(i);
+			t += ParseDouble.parseFromByteLessBranches(s, 0);
+		}
+		return t;
+	}
 }
 

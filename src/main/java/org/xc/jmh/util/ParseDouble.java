@@ -362,4 +362,73 @@ public final class ParseDouble
             return negative * (value - DIGITOFFSET - DIGITOFFSET * 10 - DIGITOFFSET * 100);
         }
     }
+
+    /**
+     * Parse int from byte without knowning the end, because we know the structure
+     */
+    public static int parseFromByteLessBranches(final byte[] data, final int pos)
+    {
+    	int i = pos;
+
+        // we know for the numbers that we are very fix in length,
+        // so let's read forward
+        // we don't check if we have enough data because we have correct
+        // data and we read early enough to have always a full line in the buffer
+
+    	// could be 9 or -
+        int value = data[i++] - DIGITOFFSET;
+
+        // can be - or 0..9
+        if (value < 0)
+        {
+        	// got a - so it is -[9]9.9 or -[9].9
+            // next is a number, overwrite value
+        	value = data[i++] - DIGITOFFSET;
+
+        	// next is -9[9].9 or -9[.]9
+        	var dot = data[i++] - DIGITOFFSET;
+        	if (dot >= 0)
+        	{
+        		// got no . so 9[9].9
+            	value = value * 10 + dot;
+
+            	// skip .
+            	i++;
+        	}
+        	else
+        	{
+        		// drop . read
+        	}
+
+        	// next is -99[.]9 or -9.[9]
+        	value = value * 10 + data[i++] - DIGITOFFSET;
+
+        	return -value;
+        }
+        else
+        {
+            // [9]9.9 or [9].9
+        	// already read one number
+
+        	// next is 9[9].9 or 9[.]9
+        	var dot = data[i++] - DIGITOFFSET;
+        	if (dot >= 0)
+        	{
+        		// got no . so read 9[9].9
+            	value = value * 10 + dot;
+
+            	// skip .
+            	i++;
+        	}
+        	else
+        	{
+        		// drop . read
+        	}
+
+        	// next is 99[.]9 or 9.[9]
+        	value = value * 10 + data[i++] - DIGITOFFSET;
+
+        	return value;
+        }
+    }
 }

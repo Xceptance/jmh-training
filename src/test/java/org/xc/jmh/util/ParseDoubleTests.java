@@ -112,6 +112,15 @@ class ParseDoubleTests
 	    		ParseDouble.parseFromByteSubtractionLast(p.data.getBytes(), 0));
 	}
 
+	@ParameterizedTest
+	@MethodSource("dataSource")
+	void parseFromByteLessBranches(Param p)
+	{
+	    assertEquals(
+	    		p.expected,
+	    		ParseDouble.parseFromByteLessBranches(p.data.getBytes(), 0));
+	}
+
 	static Stream<Param> dataSource()
 	{
 		return Stream.of(
